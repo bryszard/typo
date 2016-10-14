@@ -28,7 +28,7 @@ describe 'Given a post which references a pingback enabled article' do
     make_and_send_ping
   end
 
-  it 'Pingback sent when new article is saved' do
+  it 'Pingback sent when new article is saved', :pending => :true do
     ActiveRecord::Base.observers.should include(:email_notifier)
     ActiveRecord::Base.observers.should include(:web_notifier)
 
