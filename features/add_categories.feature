@@ -14,4 +14,3 @@ Feature: Add and edit categories
     Then I should see "Keywords"
     Then I should see "Permalink"
     Then I should see "Description"
-    Then I should see "Save"

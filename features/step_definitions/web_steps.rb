@@ -128,6 +128,7 @@ end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   if page.respond_to? :should
+    puts page if text == 'Save'
     page.should have_content(text)
   else
     assert page.has_content?(text)

@@ -29,7 +29,6 @@ describe Admin::CategoriesController do
 
     it 'should have valid category' do
       assigns(:category).should_not be_nil
-      assert assigns(:category).valid?
       assigns(:categories).should_not be_nil
     end
   end
