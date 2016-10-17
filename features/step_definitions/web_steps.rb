@@ -43,6 +43,18 @@ Given /^the blog is set up$/ do
                 :state => 'active'})
 end
 
+Given /^there are two existing articles$/ do
+  [1, 2].each do |n|
+    Article.create!({
+      title: "Title #{n}",
+      author: "Author #{n}",
+      body: "This is body of article #{n}",
+      published: true,
+      published_at: Time.now
+    })
+  end
+end
+
 And /^I am logged into the admin panel$/ do
   visit '/accounts/login'
   fill_in 'user_login', :with => 'admin'
