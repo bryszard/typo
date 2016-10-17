@@ -148,15 +148,17 @@
     </ul>
   </div>
 
-  <div>
-    <h3>Merge Articles</h3>
+  <% if current_user.admin? %>
     <div>
-      <%= label_tag(:merge_id, "Article ID") %>
-      <%= text_field_tag(:merge_id) %>
+      <h3>Merge Articles</h3>
+      <div>
+        <%= label_tag(:merge_id, "Article ID") %>
+        <%= text_field_tag(:merge_id) %>
+      </div>
+      <div>
+        <%= submit_tag("Merge") %>
+      </div>
     </div>
-    <div>
-      <%= submit_tag("Merge") %>
-    </div>
-  </div>
+  <% end %>
   </div>
 </div>

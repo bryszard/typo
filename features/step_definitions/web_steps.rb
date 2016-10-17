@@ -41,6 +41,12 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
+  User.create!({:login => 'user1',
+                :password => 'bbbbbb',
+                :email => 'regular@gmail.com',
+                :profile_id => 2,
+                :name => 'user1',
+                :state => 'active'})
 end
 
 Given /^there are two existing articles$/ do
@@ -59,6 +65,18 @@ And /^I am logged into the admin panel$/ do
   visit '/accounts/login'
   fill_in 'user_login', :with => 'admin'
   fill_in 'user_password', :with => 'aaaaaaaa'
+  click_button 'Login'
+  if page.respond_to? :should
+    page.should have_content('Login successful')
+  else
+    assert page.has_content?('Login successful')
+  end
+end
+
+And /^I am logged in as a regular user$/ do
+  visit '/accounts/login'
+  fill_in 'user_login', :with => 'user1'
+  fill_in 'user_password', :with => 'bbbbbb'
   click_button 'Login'
   if page.respond_to? :should
     page.should have_content('Login successful')
