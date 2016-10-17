@@ -434,6 +434,13 @@ describe Admin::ContentController do
         end
       end
     end
+
+    describe 'when article is merged with another article' do
+
+      it 'calls merge_with method on article' do
+
+      end
+    end
   end
 
   shared_examples_for 'destroy action' do
@@ -461,7 +468,6 @@ describe Admin::ContentController do
     end
 
   end
-
 
   describe 'with admin connection' do
 

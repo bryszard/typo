@@ -142,7 +142,15 @@ class Admin::ContentController < Admin::BaseController
   def new_or_edit
     id = params[:id]
     id = params[:article][:id] if params[:article] && params[:article][:id]
+
     @article = Article.get_or_build_article(id)
+
+    if params[:merge_with].present?
+      merged = @article.merge_with(params[:merge_with])
+      redirect_to :action => :edit, :id => merged.id
+      return
+    end
+
     @article.text_filter = current_user.text_filter if current_user.simple_editor?
 
     @post_types = PostType.find(:all)
