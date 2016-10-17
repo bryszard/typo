@@ -54,7 +54,7 @@ Given /^there are two existing articles$/ do
     Article.create!({
       title: "Title #{n}",
       author: "Author #{n}",
-      body: "This is body of article #{n}",
+      body: "This is body of article #{n}. ",
       published: true,
       published_at: Time.now
     })
