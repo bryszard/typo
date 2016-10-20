@@ -436,7 +436,6 @@ describe Admin::ContentController do
     end
 
     describe 'when article is merged with another article' do
-
       it 'calls merge_with method on article' do
         article = double('object')
         merged = double()

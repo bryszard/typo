@@ -630,5 +630,35 @@ describe Article do
     end
 
   end
+
+  describe '#merge_with' do
+    before(:each) do
+      @article = Factory.create(:article, :author => 'Tom Hanks')
+      @second_article = Factory.create(:second_article, :author => 'Nicole Kidman')      
+    end
+
+    it 'merges articles content, takes title and author of the first one' do
+      third_article = @article.merge_with(@second_article.id)    
+      third_article.body.should be == @article.body + @second_article.body
+    end
+
+    it 'uses title and author of the first article on merged one' do
+      third_article = @article.merge_with(@second_article.id)
+      third_article.title.should be == @article.title
+      third_article.author.should be == @article.author
+    end
+
+    it 'carries over comments on both articles on merged one' do
+      @article.comments << Factory.create(:comment, :author => 'Author 1', :article => @article)
+      @second_article.comments << Factory.create(:comment, :author => 'Author 2', :article => @second_article)
+      @article.reload
+      @second_article.reload
+
+      third_article = @article.merge_with(@second_article.id)
+      third_article.comments.count.should be == 2
+      third_article.comments.first.author.should be == 'Author 1'
+      third_article.comments[1].author.should be == 'Author 2'
+    end
+  end
 end
 
