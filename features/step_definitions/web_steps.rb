@@ -57,7 +57,7 @@ Given /^there are two existing articles$/ do
       body: "This is body of article #{n}. ",
       published: true,
       published_at: Time.now
-    })
+    })    
   end
 end
 
@@ -283,6 +283,7 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
 end
  
 Then /^(?:|I )should be on (.+)$/ do |page_name|
+  p Article.all.map(&:id)
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
     current_path.should == path_to(page_name)
