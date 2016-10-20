@@ -418,13 +418,17 @@ class Article < Content
 
   def merge_with(article_id)
     second_article = Article.find_by_id(article_id)
-    merged_body = body + second_article.body
+    if second_article
+      merged_body = body.to_s + second_article.body.to_s
 
-    merged = Article.create(title: title, author: author, body: merged_body)
-    comments.each { |c| merged.comments << c }
-    second_article.comments.each { |c| merged.comments << c }
+      merged = Article.create(title: title, author: author, body: merged_body)
+      comments.each { |c| merged.comments << c }
+      second_article.comments.each { |c| merged.comments << c }
 
-    merged
+      merged
+    else
+      self
+    end
   end
 
   protected
