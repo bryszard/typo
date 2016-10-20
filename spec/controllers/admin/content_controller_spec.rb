@@ -438,7 +438,16 @@ describe Admin::ContentController do
     describe 'when article is merged with another article' do
 
       it 'calls merge_with method on article' do
-
+        article = double('object')
+        merged = double()
+        Article.stub(:get_or_build_article) { article }
+        merged.stub(:id) { 2 }
+        article.should_receive(:merge_with).with(1) { merged }
+        post(
+          :new,
+          :merge_with => 1
+          )
+        assert_response :redirect, :action => 'show', :id => 2
       end
     end
   end
